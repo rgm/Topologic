@@ -21,7 +21,8 @@ message("${CMAKE_VS_PLATFORM_NAME} architecture in use")
 
 if(NOT ("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "Any CPU"
      OR "${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64"
-     OR "${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86"))
+     OR "${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86"
+     OR "${CMAKE_VS_PLATFORM_NAME}" STREQUAL "m1"))
     message(FATAL_ERROR "${CMAKE_VS_PLATFORM_NAME} arch is not supported!")
 endif()
 

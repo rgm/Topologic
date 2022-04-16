@@ -192,6 +192,11 @@ elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
         OUTPUT_DIRECTORY_DEBUG   "${CMAKE_SOURCE_DIR}/output/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
         OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}/output/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
     )
+elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "m1")
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        OUTPUT_DIRECTORY_DEBUG   "${CMAKE_SOURCE_DIR}/output/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+        OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}/output/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+    )
 endif()
 if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "Any CPU")
     set_target_properties(${PROJECT_NAME} PROPERTIES
@@ -202,6 +207,10 @@ elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
         INTERPROCEDURAL_OPTIMIZATION_RELEASE "TRUE"
     )
 elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        INTERPROCEDURAL_OPTIMIZATION_RELEASE "TRUE"
+    )
+elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "m1")
     set_target_properties(${PROJECT_NAME} PROPERTIES
         INTERPROCEDURAL_OPTIMIZATION_RELEASE "TRUE"
     )
@@ -257,6 +266,11 @@ elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
         "${CMAKE_CURRENT_SOURCE_DIR}/include;"
         ${OCC_INCLUDE_DIR}
     )
+elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "m1")
+    target_include_directories(${PROJECT_NAME} PUBLIC
+        "${CMAKE_CURRENT_SOURCE_DIR}/include;"
+        ${OCC_INCLUDE_DIR}
+    )
 endif()
 
 ################################################################################
@@ -278,6 +292,12 @@ elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
         "_MBCS"
     )
 elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
+    target_compile_definitions(${PROJECT_NAME} PRIVATE
+        "TOPOLOGIC_EXPORTS;"
+        "_WINDLL;"
+        "_MBCS"
+    )
+elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "m1")
     target_compile_definitions(${PROJECT_NAME} PRIVATE
         "TOPOLOGIC_EXPORTS;"
         "_WINDLL;"
@@ -453,6 +473,24 @@ elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
     )
 elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
     set(ADDITIONAL_LIBRARY_DEPENDENCIES
+    "TKOffset;"
+    "TKPrim;"
+    "TKMesh;"
+    "TKBO;"
+    "TKShHealing;"
+    "TKG3d;"
+    "TKG2d;"
+    "TKGeomBase;"
+    "TKGeomAlgo;"
+    "TKTopAlgo;"
+    "TKernel;"
+    "TKMath;"
+    "uuid;"
+    )
+elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "m1")
+    set(ADDITIONAL_LIBRARY_DEPENDENCIES
+      "TKBrep;"
+      "TKStep;"
     "TKOffset;"
     "TKPrim;"
     "TKMesh;"
